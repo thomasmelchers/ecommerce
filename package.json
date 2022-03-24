@@ -1,0 +1,25 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon start server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasmelchers/ecommerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomasmelchers/ecommerce/issues"
+  },
+  "homepage": "https://github.com/thomasmelchers/ecommerce#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongoose": "^6.2.7",
+    "nodemon": "^2.0.15"
+  }
+}
