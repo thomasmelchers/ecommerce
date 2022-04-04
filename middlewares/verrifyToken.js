@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 
+// VERIFYING IS THE USER IS REGISTRATE => GOT A TOKEN
+
 module.exports.verrifyToken = (req, res, next) => {
 
     const authHeader = req.headers.token 
@@ -15,6 +17,8 @@ module.exports.verrifyToken = (req, res, next) => {
     }
 }
 
+// VERIFYING IS THE USER REGISTRATE GOT ACCESS
+
 module.exports.verrifyTokenAndAuthorization = (req, res, next) => {
     this.verrifyToken(req, res, ()=> {
         if(req.user.id === req.params.id || req.user.isAdmin){
@@ -24,6 +28,8 @@ module.exports.verrifyTokenAndAuthorization = (req, res, next) => {
         }
     })
 }
+
+// VERIFYING IS THE USER REGISTRATE IS AN ADMIN
 
 module.exports.verrifyTokenAndAdmin = (req, res, next) => {
     this.verrifyToken(req, res, ()=> {
