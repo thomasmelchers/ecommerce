@@ -5,6 +5,7 @@ const { verrifyToken, verrifyTokenAndAuthorization, verrifyTokenAndAdmin } = req
 router.get('/', plantController.allPlants)
 router.get('/:id', plantController.onePlant)
 router.post('/', verrifyTokenAndAdmin, plantController.createPlant)
-router.patch('/', verrifyTokenAndAdmin, plantController.updatePlant)
+router.patch('/:id', verrifyTokenAndAdmin, plantController.updatePlant)
+router.delete('/:id', verrifyTokenAndAdmin, plantController.deletePlant)
 
 module.exports = router

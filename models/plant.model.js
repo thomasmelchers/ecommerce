@@ -7,6 +7,10 @@ const PlantSchema = new mongoose.Schema(
             required: true,
             unique: true
         },
+        botanicalName: {
+            type: String, 
+            required: true
+        },
         description: {
             type: String,
             required: true
