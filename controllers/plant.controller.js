@@ -2,13 +2,22 @@ const Plant = require("../models/plant.model");
 
 // ALL PLANTS
 module.exports.allPlants = async (req, res) => {
+    // 1. Filtering data
+  const queryObj = { ...req.query };
+
+  // Excluding some fieds
+  const excludeFields = ["page", "sort", "limit", "fields"];
+  excludeFields.forEach((el) => delete queryObj);
+
+  // THE QUERY
+  let query = Plant.find(queryObj);
+
   try {
-    const plants = await Plant.find();
+    const plants = await query;
     res.status(200).json({
       total: plants.length,
       results: plants,
     });
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -27,7 +36,6 @@ module.exports.onePlant = async (req, res) => {
       status: "success",
       result: plant,
     });
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -40,10 +48,9 @@ module.exports.createPlant = async (req, res) => {
   try {
     const savedPlant = await newPlant.save();
     res.status(200).json({
-        status: "success", 
-        result: savedPlant
+      status: "success",
+      result: savedPlant,
     });
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -65,26 +72,26 @@ module.exports.updatePlant = async (req, res) => {
       status: "success",
       result: plant,
     });
-
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
+// DELETE PLANT
+
 module.exports.deletePlant = async (req, res) => {
-    try {
-        const plant = await Plant.findByIdAndDelete(req.params.id)
+  try {
+    const plant = await Plant.findByIdAndDelete(req.params.id);
 
-        if (!plant) {
-            res.status(404).json("This plant doesn't exist ! ");
-          }
-
-          res.status(200).json({
-            status: "success",
-            result : "The plant has been removed from the database",
-        });
-        
-    } catch (error) {
-        res.status(500).json(error)
+    if (!plant) {
+      res.status(404).json("This plant doesn't exist ! ");
     }
-}
+
+    res.status(200).json({
+      status: "success",
+      result: "The plant has been removed from the database",
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
