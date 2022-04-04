@@ -2,7 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config({ path: './.env' })
-const userRoute = require('./routes/user.routes')
+const userRoutes = require('./routes/user.routes')
+const plantRoutes = require('./routes/plant.routes')
 
 const app = express()
 
@@ -15,7 +16,8 @@ app.get('/', (req, res) => {
 })
 
 app.use(express.json())
-app.use('/api/user', userRoute)
+app.use('/api/user', userRoutes)
+app.use('/api/plant', plantRoutes)
 
 // SERVEUR
 const port = process.env.PORT || 5000
