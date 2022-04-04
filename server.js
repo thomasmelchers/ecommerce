@@ -5,6 +5,7 @@ dotenv.config({ path: './.env' })
 const userRoutes = require('./routes/user.routes')
 const plantRoutes = require('./routes/plant.routes')
 const cartRoutes = require('./routes/cart.routes')
+const orderRoutes = require('./routes/order.routes')
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(express.json())
 app.use('/api/user', userRoutes)
 app.use('/api/plant', plantRoutes)
 app.use('/api/cart', cartRoutes)
+app.use('/api/order', orderRoutes)
 
 // SERVEUR
 const port = process.env.PORT || 5000

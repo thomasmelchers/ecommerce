@@ -40,7 +40,7 @@ module.exports.getUserOrder = async (req, res) => {
 
   module.exports.getAllUserOrder = async (req, res) => {
     try {
-      const orders = await Order.find({userId: req.params.userId});
+      const orders = await Order.find();
   
       if (!orders) {
         res.status(404).json("These orders don't exist ! ");
@@ -48,6 +48,7 @@ module.exports.getUserOrder = async (req, res) => {
   
       res.status(200).json({
         status: "success",
+        quantityOfOrder: orders.length,
         result: orders,
       });
     } catch (err) {
