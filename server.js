@@ -6,6 +6,8 @@ const userRoutes = require('./routes/user.routes')
 const plantRoutes = require('./routes/plant.routes')
 const cartRoutes = require('./routes/cart.routes')
 const orderRoutes = require('./routes/order.routes')
+const stripeRoutes = require('./routes/stripe.routes')
+const cors = require('cors')
 
 const app = express()
 
@@ -17,11 +19,13 @@ app.get('/', (req, res) => {
     res.status(201).json('Welcome to the API')
 })
 
+app.use(cors())
 app.use(express.json())
 app.use('/api/user', userRoutes)
 app.use('/api/plant', plantRoutes)
 app.use('/api/cart', cartRoutes)
 app.use('/api/order', orderRoutes)
+app.use('/api/checkout', stripeRoutes)
 
 // SERVEUR
 const port = process.env.PORT || 5000
