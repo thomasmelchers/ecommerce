@@ -1,5 +1,6 @@
 const User = require('../models/user.model')
 const CryptoJS = require('crypto-js')
+const jwt = require('jsonwebtoken')
 
 
 // REGISTRATION
@@ -35,10 +36,19 @@ module.exports.signIn = async (req, res) => {
         // COMPARE PASSWORD
         pswd !== req.body.password && res.status(401).json('Wrong credentials')
 
+
+        const accessToken = jwt.sign({
+            id : user._id,
+            isAdmin: user.isAdmin
+        }, process.env.JWT_SECRET_KEY,
+        {expiresIn: '3d'}
+        )
+
          // IF CORRECT
          // destructuring user to not show the password
-        const { password, ...others } = user.doc
-        res.status(200).json(others)
+        const { password, ...others } = user._doc
+  
+        res.status(200).json({others, accessToken})
 
     } catch (err) {
         res.status(500).json(err)
