@@ -10,3 +10,7 @@
 - Stripe
 - JWT
 - Crypto JS
+
+## DATABASE ORGANISATION
+
+![database UML diagrams](/assets/database_UML_diagrams.jpeg)
